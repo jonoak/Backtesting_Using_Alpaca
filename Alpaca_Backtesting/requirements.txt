@@ -1,0 +1,4 @@
+alpaca_trade_api
+backtrader
+matplotlib==3.2.2
+plotly
