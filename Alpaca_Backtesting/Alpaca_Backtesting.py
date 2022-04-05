@@ -24,7 +24,7 @@ import backtrader as bt
 import matplotlib as mpl
 mpl.rcParams['figure.dpi'] = 150
 
-def run_backtest(strategy, symbols, start, end, timeframe=TimeFrame.Day, cash=10000):
+def run_backtest(strategy, symbols, start, end, rest_api, timeframe=TimeFrame.Day, cash=10000):
 
   # initialize backtrader broker
   cerebro = bt.Cerebro(stdstats=True)
@@ -82,6 +82,7 @@ class AllWeatherStrategy(bt.Strategy):
            self.order_target_percent(d, target=self.weights[symbol])
 
 
+stocks_and_weights = {}
 def Test_Backtesting_AllWeatherStrategy():
   print("whats your Alpaca API_KEY?")
   API_KEY = input()
@@ -93,7 +94,6 @@ def Test_Backtesting_AllWeatherStrategy():
   print("list the stocks you want to backtest, seperate them by a comma")
   the_stocks = input()
   the_stocks = the_stocks.split(',')
-  stocks_and_weights = {}
   for x in the_stocks:
     print('how much weight for '+ x + " ? (enter a number between 1 and 100")
     the_weight = input()
@@ -104,6 +104,6 @@ def Test_Backtesting_AllWeatherStrategy():
   end_date = input()
   print("enter a the starting capital (ex 10000)")
   starting_capital = int(input())
-  run_backtest(AllWeatherStrategy, the_stocks , start_date, end_date, TimeFrame.Day, starting_capital)
+  run_backtest(AllWeatherStrategy, the_stocks , start_date, end_date, rest_api, TimeFrame.Day, starting_capital)
 
 
